@@ -1,0 +1,9 @@
+# Node-modules directories
+node_modules
+
+# Config and secret file
+config
+
+# Package manager's lock file (Yarn/NPM, In this case we use NPM)
+package.lock
+yarn.lock
