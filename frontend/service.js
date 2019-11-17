@@ -11,7 +11,7 @@ const urlB64ToUint8Array = (base64String) => {
 }
 
 const saveSubscription = async (subscription) => {
-    const SERVER_URL = "http://localhost:4000/save-subsciption";
+    const SERVER_URL = "http://localhost:4000/save-subscription";
     const response = await fetch(SERVER_URL, {
         method: "POST",
         headers: {
@@ -19,7 +19,7 @@ const saveSubscription = async (subscription) => {
         },
         body: JSON.stringify(subscription)
     });
-    return response.json();
+    return response;
 }
 
 self.addEventListener("activate", async () => {
@@ -42,7 +42,12 @@ self.addEventListener("activate", async () => {
 self.addEventListener("push", (event) => {
     if(!!event.data) {
         console.log("Push event >>>", event.data.text());
+        showLocalNotification("Yolo", event.data.text(), self.registration);
     } else {
         console.log("Push event but no data!");
     }
-})
+});
+const showLocalNotification = (title, body, swRegistration) => {
+    const options = {body};
+    swRegistration.showNotification(title, options);
+}
